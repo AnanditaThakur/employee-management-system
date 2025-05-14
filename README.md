@@ -25,3 +25,28 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+# Employee Management System
+
+This is a simple Angular 14-based Employee Management System that allows users to:
+
+- View employee details
+- Add new employees
+- Edit employee information
+- Delete employee records
+
+## Features
+
+- User-friendly interface
+- Basic CRUD operations (Create, Read, Update, Delete)
+- Responsive design
+
+## Installation
+
+To run this project locally:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/angular-employee-management.git
+
