@@ -1,0 +1,26 @@
+<h2>Add Employee</h2>
+
+<form [formGroup]="employeeForm" (submit)="onSubmit()">
+  <div>
+    <label for="name">Employee Name:</label>
+    <input type="text" id="name" formControlName="name" required>
+  </div>
+  <div>
+    <label for="location">Location:</label>
+    <select id="location" name="location" formControlName="location">
+      <option *ngFor="let location of locations" [ngValue]="location">{{ location }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="email" id="email" formControlName="email" required>
+  </div>
+  <div>
+    <label for="mobile">Mobile:</label>
+    <input type="text" id="mobile" formControlName="mobile" maxlength="10" required>
+  </div>
+
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>

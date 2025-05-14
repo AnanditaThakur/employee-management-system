@@ -1,0 +1,13 @@
+<h2>Employee Details</h2>
+<div *ngIf="employee" >
+  <p><strong>&nbsp; &nbsp; &nbsp; ID:</strong> {{ employee.id }}</p>
+  <p><strong>&nbsp; &nbsp; &nbsp; Name:</strong> {{ employee.name }}</p>
+  <p><strong>&nbsp; &nbsp; &nbsp; Location:</strong> {{ employee.location }}</p>
+  <p><strong>&nbsp; &nbsp; &nbsp; Email:</strong> {{ employee.email }}</p>
+  <p><strong>&nbsp; &nbsp; &nbsp; Mobile:</strong> {{ employee.mobile }}</p>
+</div>
+<div *ngIf="!employee">Employee not found</div>
+
+<div>
+    <button type="submit" (click)="return()">Back</button>
+</div>

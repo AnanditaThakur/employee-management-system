@@ -1,0 +1,30 @@
+<h2>Edit Employee</h2>
+
+<form (submit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name" class="form-control" [(ngModel)]="employee.name" name="name" required>
+  </div>
+  <div>
+    <label for="location">Location:</label>
+    <select id="location" name="location" [(ngModel)]="employee.location">
+      <option *ngFor="let location of locations" [value]="location">{{ location }}</option>
+    </select>
+  </div>
+  <div>
+    <label for="email">Email:</label>
+    <input type="text" id="email" class="form-control" name="email" [(ngModel)]="employee.email" required>
+  </div>
+  <div>
+    <label for="mobile">Mobile:</label>
+    <input type="text" id="mobile" class="form-control" name="mobile" [(ngModel)]="employee.mobile" required>
+  </div>
+
+  <div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </div>
+</form>
+
+<div>
+  <button type="submit" (click)="return()">Back</button>
+</div>
