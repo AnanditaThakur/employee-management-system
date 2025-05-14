@@ -1,32 +1,63 @@
-<div class="employees-list">
-    <p>Filter by:</p>
-    <input type="text" [(ngModel)]="filterText"  (input)="filterEmployees()">
-      <p>Total number of employees: {{ totalEmployees }}</p>
-      <table border="1">
-        <thead>
-          <tr>
-            <th>Emp ID</th>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let employee of employees">
-            <td><a [routerLink]="['/details', employee.id]">{{ employee.id }}</a></td>
-            <td>{{ employee.name }}</td>
-            <td>{{ employee.location }}</td>
-            <td>{{ employee.email }}</td>
-            <td>{{ employee.mobile }}</td>
-            <td><button (click)="editEmployee(employee.id)">Edit{{employee.id}}</button></td>
-            <td><button (click)="deleteEmployee(employee.id)">Delete{{employee.id}}</button></td>
-          </tr>
-        </tbody>
-      </table>
-  
-    
+<div class="container mt-4">
+    <div class="mb-4">
+      <h2>Employees List</h2>
+      <div class="d-flex justify-content-between">
+        <div>
+          <label for="filter" class="form-label">Filter by Name:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="filter"
+            [(ngModel)]="filterText"
+            (input)="filterEmployees()"
+            placeholder="Search employee by name"
+          />
+        </div>
+        <div>
+          <p>Total number of employees: <strong>{{ totalEmployees }}</strong></p>
+        </div>
+      </div>
     </div>
-    
+  
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Emp ID</th>
+          <th>Name</th>
+          <th>Location</th>
+          <th>Email</th>
+          <th>Mobile</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td><a [routerLink]="['/details', employee.id]">{{ employee.id }}</a></td>
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.location }}</td>
+          <td>{{ employee.email }}</td>
+          <td>{{ employee.mobile }}</td>
+          <td>
+            <button class="btn btn-warning" (click)="editEmployee(employee.id)">Edit</button>
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="confirmDelete(employee.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Pagination (Optional for large lists) -->
+    <nav *ngIf="employees.length > 5">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 1">
+          <button class="page-link" (click)="changePage(currentPage - 1)">Previous</button>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages">
+          <button class="page-link" (click)="changePage(currentPage + 1)">Next</button>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  

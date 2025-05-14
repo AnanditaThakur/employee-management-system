@@ -1,13 +1,25 @@
-<h2>Employee Details</h2>
-<div *ngIf="employee" >
-  <p><strong>&nbsp; &nbsp; &nbsp; ID:</strong> {{ employee.id }}</p>
-  <p><strong>&nbsp; &nbsp; &nbsp; Name:</strong> {{ employee.name }}</p>
-  <p><strong>&nbsp; &nbsp; &nbsp; Location:</strong> {{ employee.location }}</p>
-  <p><strong>&nbsp; &nbsp; &nbsp; Email:</strong> {{ employee.email }}</p>
-  <p><strong>&nbsp; &nbsp; &nbsp; Mobile:</strong> {{ employee.mobile }}</p>
-</div>
-<div *ngIf="!employee">Employee not found</div>
-
-<div>
-    <button type="submit" (click)="return()">Back</button>
-</div>
+<div class="container mt-4">
+    <h2>Employee Details</h2>
+  
+    <!-- Show employee details if available -->
+    <div *ngIf="employee; else notFound" class="employee-details">
+      <p><strong>ID:</strong> {{ employee.id }}</p>
+      <p><strong>Name:</strong> {{ employee.name }}</p>
+      <p><strong>Location:</strong> {{ employee.location }}</p>
+      <p><strong>Email:</strong> {{ employee.email }}</p>
+      <p><strong>Mobile:</strong> {{ employee.mobile }}</p>
+    </div>
+  
+    <!-- Show if employee not found -->
+    <ng-template #notFound>
+      <div class="alert alert-warning">
+        Employee not found! Redirecting to the employee list.
+      </div>
+    </ng-template>
+  
+    <!-- Back button with styling -->
+    <div class="mt-3">
+      <button class="btn btn-secondary" (click)="return()">Back</button>
+    </div>
+  </div>
+  

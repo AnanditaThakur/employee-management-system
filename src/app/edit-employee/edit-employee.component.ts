@@ -6,38 +6,41 @@ import { EmployeeService } from '../service/employee.service';
 @Component({
   selector: 'app-edit-employee',
   templateUrl: './edit-employee.component.html',
-  styleUrls: ['./edit-employee.component.css']
+  styleUrls: ['./edit-employee.component.css'],
 })
 export class EditEmployeeComponent implements OnInit {
   employee!: Employee;
-
   locations: string[] = ['Bangalore', 'Chennai', 'Pune', 'Hyderabad'];
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private employeeService: EmployeeService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
     const foundEmployee = this.employeeService.getEmployeeById(id);
-  
+
     if (!foundEmployee) {
-      this.router.navigate(['/employees']);
+      setTimeout(() => {
+        this.router.navigate(['/employees']);
+      }, 3000); // Wait for 3 seconds before redirecting
       return;
     }
-  
+
     this.employee = foundEmployee;
   }
-  
 
   onSubmit(): void {
-    // Call the service to update the employee
-    this.employeeService.updateEmployee(this.employee);
-    this.router.navigate(['/employees']);
+    if (this.employee) {
+      // Call the service to update the employee
+      this.employeeService.updateEmployee(this.employee);
+      this.router.navigate(['/employees']);
+    }
   }
 
-  return(): void{
+  return(): void {
     this.router.navigate(['/employees']);
   }
 }

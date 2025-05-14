@@ -1,26 +1,73 @@
-<h2>Add Employee</h2>
-
-<form [formGroup]="employeeForm" (submit)="onSubmit()">
-  <div>
-    <label for="name">Employee Name:</label>
-    <input type="text" id="name" formControlName="name" required>
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Add Employee</h2>
+  
+    <form [formGroup]="employeeForm" (submit)="onSubmit()" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Employee Name:</label>
+        <input
+          type="text"
+          id="name"
+          class="form-control"
+          formControlName="name"
+          required
+          [ngClass]="{ 'is-invalid': employeeForm.controls['name'].invalid && employeeForm.controls['name'].touched }"
+        />
+        <div *ngIf="employeeForm.controls['name'].invalid && employeeForm.controls['name'].touched" class="invalid-feedback">
+          Name is required.
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="location" class="form-label">Location:</label>
+        <select
+          id="location"
+          class="form-select"
+          formControlName="location"
+          required
+          [ngClass]="{ 'is-invalid': employeeForm.controls['location'].invalid && employeeForm.controls['location'].touched }"
+        >
+          <option value="">Select Location</option>
+          <option *ngFor="let location of locations" [ngValue]="location">{{ location }}</option>
+        </select>
+        <div *ngIf="employeeForm.controls['location'].invalid && employeeForm.controls['location'].touched" class="invalid-feedback">
+          Location is required.
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          formControlName="email"
+          required
+          [ngClass]="{ 'is-invalid': employeeForm.controls['email'].invalid && employeeForm.controls['email'].touched }"
+        />
+        <div *ngIf="employeeForm.controls['email'].invalid && employeeForm.controls['email'].touched" class="invalid-feedback">
+          Please enter a valid email address.
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="mobile" class="form-label">Mobile:</label>
+        <input
+          type="text"
+          id="mobile"
+          class="form-control"
+          formControlName="mobile"
+          maxlength="10"
+          required
+          [ngClass]="{ 'is-invalid': employeeForm.controls['mobile'].invalid && employeeForm.controls['mobile'].touched }"
+        />
+        <div *ngIf="employeeForm.controls['mobile'].invalid && employeeForm.controls['mobile'].touched" class="invalid-feedback">
+          Mobile number is required (max 10 digits).
+        </div>
+      </div>
+  
+      <div class="text-center">
+        <button type="submit" class="btn btn-success" [disabled]="employeeForm.invalid">Submit</button>
+      </div>
+    </form>
   </div>
-  <div>
-    <label for="location">Location:</label>
-    <select id="location" name="location" formControlName="location">
-      <option *ngFor="let location of locations" [ngValue]="location">{{ location }}</option>
-    </select>
-  </div>
-  <div>
-    <label for="email">Email:</label>
-    <input type="email" id="email" formControlName="email" required>
-  </div>
-  <div>
-    <label for="mobile">Mobile:</label>
-    <input type="text" id="mobile" formControlName="mobile" maxlength="10" required>
-  </div>
-
-  <div>
-    <button type="submit">Submit</button>
-  </div>
-</form>
+  

@@ -9,17 +9,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./employees-list.component.css'],
 })
 export class EmployeesListComponent implements OnInit {
-  employees: Employee[]=[];
-  totalEmployees: number=0;
-
+  employees: Employee[] = [];
+  totalEmployees: number = 0;
   filterText: string = '';
-  
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalPages: number = 1;
 
-  constructor(private employeeService: EmployeeService ,private router: Router) {}
+  constructor(private employeeService: EmployeeService, private router: Router) {}
 
   ngOnInit(): void {
     this.getEmployees();
   }
+
   filterEmployees() {
     if (this.filterText) {
       const filterTextLowerCase = this.filterText.toLowerCase();
@@ -33,20 +35,38 @@ export class EmployeesListComponent implements OnInit {
   }
 
   getEmployees() {
-    this.employees = this.employeeService.getEmployees().sort((a: { id: number; }, b: { id: number; }) => a.id - b.id);
+    this.employees = this.employeeService
+      .getEmployees()
+      .sort((a: { id: number }, b: { id: number }) => a.id - b.id)
+      .slice((this.currentPage - 1) * this.itemsPerPage, this.currentPage * this.itemsPerPage);
+
     this.totalEmployees = this.employees.length;
+    this.totalPages = Math.ceil(this.totalEmployees / this.itemsPerPage);
   }
 
-  employeeDetails(id: number){
-    this.router.navigate(["/details/:id", id]);
+  employeeDetails(id: number) {
+    this.router.navigate(['/details/:id', id]);
   }
 
-  editEmployee(id: number){
-    this.router.navigate(["/editEmployee/", id]);
+  editEmployee(id: number) {
+    this.router.navigate(['/editEmployee', id]);
   }
 
-  deleteEmployee(id: number){
+  confirmDelete(id: number) {
+    if (confirm('Are you sure you want to delete this employee?')) {
+      this.deleteEmployee(id);
+    }
+  }
+
+  deleteEmployee(id: number) {
     this.employeeService.deleteEmployee(id);
-      this.getEmployees();
+    this.getEmployees(); // Reload the employee list
+  }
+
+  changePage(page: number) {
+    if (page > 0 && page <= this.totalPages) {
+      this.currentPage = page;
+      this.getEmployees(); // Refresh the employee list based on the new page
+    }
   }
 }

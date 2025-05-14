@@ -1,14 +1,17 @@
-<h1>Employee Management System</h1>
-<div>
-<a routerLink="/employees" routerLinkActive="active">Employees List</a>
-    &nbsp;
-<a routerLink="/addEmployee" routerLinkActive="active">Add Employee</a>
-</div>
-<div>
-<router-outlet></router-outlet>
-</div>
-
-
-
-
-
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Employee Management System</h1>
+  
+    <div class="d-flex justify-content-center mb-4">
+      <a routerLink="/employees" routerLinkActive="active" class="btn btn-primary me-2">
+        Employees List
+      </a>
+      <a routerLink="/addEmployee" routerLinkActive="active" class="btn btn-success">
+        Add Employee
+      </a>
+    </div>
+  
+    <div class="card p-3 shadow-sm">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  
